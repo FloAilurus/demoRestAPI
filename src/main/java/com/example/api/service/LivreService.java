@@ -9,4 +9,5 @@ public interface LivreService {
 
     List<LivreDTO> getAll();
 
+    LivreDTO getOne(String isbn);
 }

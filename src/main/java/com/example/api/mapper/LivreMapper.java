@@ -1,10 +1,12 @@
 package com.example.api.mapper;
 
+import com.example.api.form.LivreForm;
 import com.example.api.models.dto.LivreDTO;
 import com.example.api.models.entity.Auteur;
 import com.example.api.models.entity.Livre;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
@@ -27,6 +29,18 @@ public class LivreMapper {
                             .collect(Collectors.toList())
                 )
                 .build();
+    }
+
+    private Livre formtoEntity(LivreForm form) {
+        if (form == null)
+            return null;
+
+        Livre l = new Livre();
+        l.setIsbn(form.getIsbn());
+        l.setTitre(form.getTitre());
+        l.setPrix(form.getPrix());
+
+        return l;
     }
 
     private LivreDTO.AuteurDTO toInnerDto(Auteur auteur) {

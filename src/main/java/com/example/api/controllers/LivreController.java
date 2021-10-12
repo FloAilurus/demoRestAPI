@@ -2,10 +2,7 @@ package com.example.api.controllers;
 
 import com.example.api.models.dto.LivreDTO;
 import com.example.api.service.LivreService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -24,5 +21,10 @@ public class LivreController {
     @GetMapping("/all")
     public List<LivreDTO> getAll() {
         return service.getAll();
+    }
+
+    @GetMapping("/{isbn}")
+    public LivreDTO getOne(@PathVariable String isbn) {
+        return service.getOne(isbn);
     }
 }
