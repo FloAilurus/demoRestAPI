@@ -1,6 +1,7 @@
 package com.example.api.mapper;
 
 import com.example.api.form.LivreForm;
+import com.example.api.form.LivreUpdateForm;
 import com.example.api.models.dto.LivreDTO;
 import com.example.api.models.entity.Auteur;
 import com.example.api.models.entity.Livre;
@@ -37,6 +38,17 @@ public class LivreMapper {
 
         Livre l = new Livre();
         l.setIsbn(form.getIsbn());
+        l.setTitre(form.getTitre());
+        l.setPrix(form.getPrix());
+
+        return l;
+    }
+
+    public Livre updateFormToEntity(LivreUpdateForm form) {
+        if (form == null)
+            return null;
+
+        Livre l = new Livre();
         l.setTitre(form.getTitre());
         l.setPrix(form.getPrix());
 

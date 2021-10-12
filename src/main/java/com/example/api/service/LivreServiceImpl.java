@@ -1,6 +1,7 @@
 package com.example.api.service;
 
 import com.example.api.form.LivreForm;
+import com.example.api.form.LivreUpdateForm;
 import com.example.api.mapper.LivreMapper;
 import com.example.api.models.dto.LivreDTO;
 import com.example.api.models.entity.Auteur;
@@ -53,8 +54,43 @@ public class LivreServiceImpl implements LivreService{
                 .stream()
                 .map(id -> auteurRepository.findById(id).orElseThrow(RuntimeException::new))
                 .collect(Collectors.toSet());
+
         toInsert.setAuteurs(auteurs);
+
+        //TODO
 
         return mapper.toDTO(toInsert);
     }
+
+    @Override
+    public LivreDTO delete(String isbn) {
+
+        Livre toDelete = repository.findById(isbn)
+                .orElseThrow(RuntimeException::new);
+
+        repository.delete(toDelete);
+
+        return mapper.toDTO(toDelete);
+    }
+
+    @Override
+    public LivreDTO update(String isbn, LivreUpdateForm form) {
+
+        Livre toUpdate = repository.findById(isbn)
+                .orElseThrow(RuntimeException::new);
+
+        toUpdate.setPrix(form.getPrix());
+        toUpdate.setTitre(form.getTitre());
+        Set<Auteur> auteurs = form.getAuteurIds()
+                .stream()
+                .map(id -> auteurRepository.findById(id).orElseThrow(RuntimeException::new))
+                .collect(Collectors.toSet());
+        toUpdate.setAuteurs(auteurs);
+
+        //TODO
+
+        return mapper.toDTO(toUpdate);
+    }
+
+
 }

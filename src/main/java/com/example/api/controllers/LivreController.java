@@ -1,6 +1,7 @@
 package com.example.api.controllers;
 
 import com.example.api.form.LivreForm;
+import com.example.api.form.LivreUpdateForm;
 import com.example.api.models.dto.LivreDTO;
 import com.example.api.service.LivreService;
 import org.springframework.http.HttpHeaders;
@@ -45,5 +46,20 @@ public class LivreController {
         }
 
         return service.insert(form);
+    }
+
+    @DeleteMapping(params = "isbn")
+    public LivreDTO deleteByParam(@RequestParam(name = "isbn") String id) {
+        return service.delete(id);
+    }
+
+    @DeleteMapping("/{isbn}")
+    public LivreDTO delete(@PathVariable(name = "isbn") String id) {
+        return service.delete(id);
+    }
+
+    @PutMapping(params = "isbn")
+    public LivreDTO update(@RequestParam String isbn, @Valid @RequestBody LivreUpdateForm form) {
+        return service.update(isbn, form);
     }
 }
