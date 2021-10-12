@@ -1,5 +1,6 @@
 package com.example.api.service;
 
+import com.example.api.form.LivreForm;
 import com.example.api.models.dto.LivreDTO;
 import com.example.api.models.entity.Livre;
 
@@ -10,4 +11,6 @@ public interface LivreService {
     List<LivreDTO> getAll();
 
     LivreDTO getOne(String isbn);
+
+    LivreDTO insert(LivreForm form);
 }

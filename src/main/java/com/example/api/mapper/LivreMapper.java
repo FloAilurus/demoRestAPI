@@ -31,7 +31,7 @@ public class LivreMapper {
                 .build();
     }
 
-    private Livre formtoEntity(LivreForm form) {
+    public Livre formtoEntity(LivreForm form) {
         if (form == null)
             return null;
 
